@@ -44,8 +44,7 @@ if (cluster.isPrimary) {
                 res.writeHead(200, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: responseData.latitude,
-                        longitude: responseData.longitude,
+                        data: `https://www.google.com/maps/dir/My+Location/${responseData.latitude},${responseData.longitude}`,
                     })
                 )
             } else {
@@ -53,8 +52,7 @@ if (cluster.isPrimary) {
                 res.writeHead(404, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: "Not found",
-                        longitude: "Not found",
+                        data: "Not found",
                     })
                 )
             }
@@ -67,8 +65,7 @@ if (cluster.isPrimary) {
                 res.writeHead(200, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: responseData.latitude,
-                        longitude: responseData.longitude,
+                        data: `https://www.google.com/maps/dir/My+Location/${responseData.latitude},${responseData.longitude}`,
                     })
                 )
             } else {
@@ -76,8 +73,7 @@ if (cluster.isPrimary) {
                 res.writeHead(404, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: "Not found",
-                        longitude: "Not found",
+                        data: "Not found",
                     })
                 )
             }
@@ -90,8 +86,7 @@ if (cluster.isPrimary) {
                 res.writeHead(200, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: responseData.latitude,
-                        longitude: responseData.longitude,
+                        data: `https://www.google.com/maps/dir/My+Location/${responseData.latitude},${responseData.longitude}`,
                     })
                 )
             } else {
@@ -99,8 +94,7 @@ if (cluster.isPrimary) {
                 res.writeHead(404, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: "Not found",
-                        longitude: "Not found",
+                        data: "Not found",
                     })
                 )
             }
@@ -113,8 +107,7 @@ if (cluster.isPrimary) {
                 res.writeHead(200, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: responseData.latitude,
-                        longitude: responseData.longitude,
+                        data: `https://www.google.com/maps/dir/My+Location/${responseData.latitude},${responseData.longitude}`,
                     })
                 )
             } else {
@@ -122,8 +115,7 @@ if (cluster.isPrimary) {
                 res.writeHead(404, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: "Not found",
-                        longitude: "Not found",
+                        data: "Not found",
                     })
                 )
             }
@@ -136,8 +128,7 @@ if (cluster.isPrimary) {
                 res.writeHead(200, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: responseData.latitude,
-                        longitude: responseData.longitude,
+                        data: `https://www.google.com/maps/dir/My+Location/${responseData.latitude},${responseData.longitude}`,
                     })
                 )
             } else {
@@ -145,8 +136,7 @@ if (cluster.isPrimary) {
                 res.writeHead(404, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: "Not found",
-                        longitude: "Not found",
+                        data: "Not found",
                     })
                 )
             }
@@ -159,8 +149,7 @@ if (cluster.isPrimary) {
                 res.writeHead(200, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: responseData.latitude,
-                        longitude: responseData.longitude,
+                        data: `https://www.google.com/maps/dir/My+Location/${responseData.latitude},${responseData.longitude}`,
                     })
                 )
             } else {
@@ -168,8 +157,7 @@ if (cluster.isPrimary) {
                 res.writeHead(404, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: "Not found",
-                        longitude: "Not found",
+                        data: "Not found",
                     })
                 )
             }
@@ -182,8 +170,7 @@ if (cluster.isPrimary) {
                 res.writeHead(200, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: responseData.latitude,
-                        longitude: responseData.longitude,
+                        data: `https://www.google.com/maps/dir/My+Location/${responseData.latitude},${responseData.longitude}`,
                     })
                 )
             } else {
@@ -191,8 +178,7 @@ if (cluster.isPrimary) {
                 res.writeHead(404, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: "Not found",
-                        longitude: "Not found",
+                        data: "Not found",
                     })
                 )
             }
@@ -205,8 +191,7 @@ if (cluster.isPrimary) {
                 res.writeHead(200, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: responseData.latitude,
-                        longitude: responseData.longitude,
+                        data: `https://www.google.com/maps/dir/My+Location/${responseData.latitude},${responseData.longitude}`,
                     })
                 )
             } else {
@@ -214,8 +199,7 @@ if (cluster.isPrimary) {
                 res.writeHead(404, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: "Not found",
-                        longitude: "Not found",
+                        data: "Not found",
                     })
                 )
             }
@@ -228,8 +212,7 @@ if (cluster.isPrimary) {
                 res.writeHead(200, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: responseData.latitude,
-                        longitude: responseData.longitude,
+                        data: `https://www.google.com/maps/dir/My+Location/${responseData.latitude},${responseData.longitude}`,
                     })
                 )
             } else {
@@ -237,8 +220,7 @@ if (cluster.isPrimary) {
                 res.writeHead(404, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: "Not found",
-                        longitude: "Not found",
+                        data: "Not found",
                     })
                 )
             }
@@ -251,8 +233,7 @@ if (cluster.isPrimary) {
                 res.writeHead(200, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: responseData.latitude,
-                        longitude: responseData.longitude,
+                        data: responseData.rush,
                     })
                 )
             } else {
@@ -260,8 +241,7 @@ if (cluster.isPrimary) {
                 res.writeHead(404, { "Content-Type": "application/json" })
                 res.end(
                     JSON.stringify({
-                        latitude: "Not found",
-                        longitude: "Not found",
+                        data: "Not found",
                     })
                 )
             }
@@ -269,8 +249,7 @@ if (cluster.isPrimary) {
             res.writeHead(404, { "Content-Type": "application/json" })
             res.end(
                 JSON.stringify({
-                    latitude: "Not found",
-                    longitude: "Not found",
+                    data: "Not found",
                 })
             )
         }
