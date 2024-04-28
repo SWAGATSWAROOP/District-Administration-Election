@@ -2,7 +2,8 @@ import cluster from "node:cluster"
 import http from "node:http"
 import { availableParallelism } from "node:os"
 import process from "node:process"
-import { getPhillaur } from "./caches/locations/location.js"
+import { getPhillaur } from "./caches/locations/phillaur.js"
+import { getRush } from "./caches/rushCheck.js"
 
 const numCPUs = availableParallelism()
 
@@ -22,23 +23,30 @@ if (cluster.isPrimary) {
     // In this case it is an HTTP server
     const server = http.createServer((req, res) => {
         // Handling different routes/endpoints
-        if (req.url.startsWith("/location/")) {
-        // Extracting the uniquekey from the URL
-        const urlParts = req.url.split('/');
-        // Extract the uniquekey from the URL
-        const uniqueKey = decodeURIComponent(urlParts[urlParts.length - 1]);
-        // Find the data based on the uniquekey
-        const responseData = getPhillaur().find(element => element.uniqueKey === uniqueKey);
+        if (req.url.startsWith("/Phillaur/")) {
+            // Extracting the uniquekey from the URL
+            const urlParts = req.url.split("/")
+            // Extract the uniquekey from the URL
+            const uniqueKey = decodeURIComponent(urlParts[urlParts.length - 1])
+            // Find the data based on the uniquekey
+            const responseData = getPhillaur().find(
+                (element) => element.uniqueKey === uniqueKey
+            )
             if (responseData) {
-                res.writeHead(200, { "Content-Type": "application/json" });
-                res.end(JSON.stringify({ latitude: responseData.latitude, longitude: responseData.longitude }));
+                res.writeHead(200, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: responseData.latitude,
+                        longitude: responseData.longitude,
+                    })
+                )
             } else {
                 // If no data found for the given uniquekey, return 404
-                res.writeHead(404, { "Content-Type": "application/json" });
-                const errorData = { error: "Location not found" };
-                res.end(JSON.stringify(errorData));
+                res.writeHead(404, { "Content-Type": "application/json" })
+                const errorData = { error: "Location not found" }
+                res.end(JSON.stringify(errorData))
             }
-        }else if (req.url === "/about") {
+        } else if (req.url === "/about") {
             res.writeHead(200, { "Content-Type": "application/json" })
             const aboutData = { message: "About Page" }
             res.end(JSON.stringify(aboutData))
