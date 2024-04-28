@@ -2,7 +2,7 @@ import cluster from "node:cluster"
 import http from "node:http"
 import { availableParallelism } from "node:os"
 import process from "node:process"
-import { getPhillaur } from "./caches/locations/phillaur.js"
+import { getPhillaur } from "./caches/locations/phillaurLocation.js"
 import { getRush } from "./caches/rushCheck.js"
 
 const numCPUs = availableParallelism()
