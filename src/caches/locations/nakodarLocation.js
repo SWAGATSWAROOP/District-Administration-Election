@@ -1,10 +1,10 @@
 import { fetchData } from "../../utils/fetchData.js"
 
-let data = await fetchData(process.env.PHILLAUR_LOCATION_URL)
+let data = await fetchData(process.env.NAKODAR_LOCATION_URL)
 
 async function fetchDataAndUpdate() {
     try {
-        data = await fetchData(process.env.PHILLAUR_LOCATION_URL)
+        data = await fetchData(process.env.NAKODAR_LOCATION_URL)
     } catch (error) {
         console.error("Error fetching data:", error)
     }
@@ -12,4 +12,4 @@ async function fetchDataAndUpdate() {
 
 setInterval(fetchDataAndUpdate, 24 * 60 * 60 * 1000)
 
-export const getPhillaur = () => data
+export const getNakodar = () => data

@@ -3,6 +3,14 @@ import http from "node:http"
 import { availableParallelism } from "node:os"
 import process from "node:process"
 import { getPhillaur } from "./caches/locations/phillaurLocation.js"
+import { getAdampur } from "./caches/locations/adampurLocation.js"
+import { getjalandharCantt } from "./caches/locations/jalandharCanttLocation.js"
+import { getjalandharCenter } from "./caches/locations/jalandharCenterLocation.js"
+import { getjalandharNorth } from "./caches/locations/jalandharNorthLocation.js"
+import { getjalandharWest } from "./caches/locations/jalandharWestLocation.js"
+import { getNakodar } from "./caches/locations/nakodarLocation.js"
+import { getShahkot } from "./caches/locations/shahkotLocation.js"
+import { getKartarpur } from "./caches/locations/kartarpurLocation.js"
 import { getRush } from "./caches/rushCheck.js"
 
 const numCPUs = availableParallelism()
@@ -23,11 +31,11 @@ if (cluster.isPrimary) {
     // In this case it is an HTTP server
     const server = http.createServer((req, res) => {
         // Handling different routes/endpoints
-        if (req.url.startsWith("/Phillaur/")) {
-            // Extracting the uniquekey from the URL
-            const urlParts = req.url.split("/")
-            // Extract the uniquekey from the URL
-            const uniqueKey = decodeURIComponent(urlParts[urlParts.length - 1])
+        // Extracting the uniquekey from the URL
+        const urlParts = req.url.split("/")
+        // Extract the uniquekey from the URL
+        const uniqueKey = decodeURIComponent(urlParts[urlParts.length - 1])
+        if (req.url.startsWith("/phillaur/")) {
             // Find the data based on the uniquekey
             const responseData = getPhillaur().find(
                 (element) => element.uniqueKey === uniqueKey
@@ -43,17 +51,228 @@ if (cluster.isPrimary) {
             } else {
                 // If no data found for the given uniquekey, return 404
                 res.writeHead(404, { "Content-Type": "application/json" })
-                const errorData = { error: "Location not found" }
-                res.end(JSON.stringify(errorData))
+                res.end(
+                    JSON.stringify({
+                        latitude: "Not found",
+                        longitude: "Not found",
+                    })
+                )
             }
-        } else if (req.url === "/about") {
-            res.writeHead(200, { "Content-Type": "application/json" })
-            const aboutData = { message: "About Page" }
-            res.end(JSON.stringify(aboutData))
+        } else if (req.url.startsWith("/adampur/")) {
+            // Find the data based on the uniquekey
+            const responseData = getAdampur().find(
+                (element) => element.uniqueKey === uniqueKey
+            )
+            if (responseData) {
+                res.writeHead(200, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: responseData.latitude,
+                        longitude: responseData.longitude,
+                    })
+                )
+            } else {
+                // If no data found for the given uniquekey, return 404
+                res.writeHead(404, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: "Not found",
+                        longitude: "Not found",
+                    })
+                )
+            }
+        } else if (req.url.startsWith("/jalandharcantt/")) {
+            // Find the data based on the uniquekey
+            const responseData = getjalandharCantt().find(
+                (element) => element.uniqueKey === uniqueKey
+            )
+            if (responseData) {
+                res.writeHead(200, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: responseData.latitude,
+                        longitude: responseData.longitude,
+                    })
+                )
+            } else {
+                // If no data found for the given uniquekey, return 404
+                res.writeHead(404, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: "Not found",
+                        longitude: "Not found",
+                    })
+                )
+            }
+        } else if (req.url.startsWith("/jalandharnorth/")) {
+            // Find the data based on the uniquekey
+            const responseData = getjalandharNorth().find(
+                (element) => element.uniqueKey === uniqueKey
+            )
+            if (responseData) {
+                res.writeHead(200, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: responseData.latitude,
+                        longitude: responseData.longitude,
+                    })
+                )
+            } else {
+                // If no data found for the given uniquekey, return 404
+                res.writeHead(404, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: "Not found",
+                        longitude: "Not found",
+                    })
+                )
+            }
+        } else if (req.url.startsWith("/jalandharcenter/")) {
+            // Find the data based on the uniquekey
+            const responseData = getjalandharCenter().find(
+                (element) => element.uniqueKey === uniqueKey
+            )
+            if (responseData) {
+                res.writeHead(200, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: responseData.latitude,
+                        longitude: responseData.longitude,
+                    })
+                )
+            } else {
+                // If no data found for the given uniquekey, return 404
+                res.writeHead(404, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: "Not found",
+                        longitude: "Not found",
+                    })
+                )
+            }
+        } else if (req.url.startsWith("/jalandharwest/")) {
+            // Find the data based on the uniquekey
+            const responseData = getjalandharWest().find(
+                (element) => element.uniqueKey === uniqueKey
+            )
+            if (responseData) {
+                res.writeHead(200, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: responseData.latitude,
+                        longitude: responseData.longitude,
+                    })
+                )
+            } else {
+                // If no data found for the given uniquekey, return 404
+                res.writeHead(404, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: "Not found",
+                        longitude: "Not found",
+                    })
+                )
+            }
+        } else if (req.url.startsWith("/kartapur/")) {
+            // Find the data based on the uniquekey
+            const responseData = getKartarpur().find(
+                (element) => element.uniqueKey === uniqueKey
+            )
+            if (responseData) {
+                res.writeHead(200, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: responseData.latitude,
+                        longitude: responseData.longitude,
+                    })
+                )
+            } else {
+                // If no data found for the given uniquekey, return 404
+                res.writeHead(404, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: "Not found",
+                        longitude: "Not found",
+                    })
+                )
+            }
+        } else if (req.url.startsWith("/shahkot/")) {
+            // Find the data based on the uniquekey
+            const responseData = getShahkot().find(
+                (element) => element.uniqueKey === uniqueKey
+            )
+            if (responseData) {
+                res.writeHead(200, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: responseData.latitude,
+                        longitude: responseData.longitude,
+                    })
+                )
+            } else {
+                // If no data found for the given uniquekey, return 404
+                res.writeHead(404, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: "Not found",
+                        longitude: "Not found",
+                    })
+                )
+            }
+        } else if (req.url.startsWith("/nakodar/")) {
+            // Find the data based on the uniquekey
+            const responseData = getNakodar().find(
+                (element) => element.uniqueKey === uniqueKey
+            )
+            if (responseData) {
+                res.writeHead(200, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: responseData.latitude,
+                        longitude: responseData.longitude,
+                    })
+                )
+            } else {
+                // If no data found for the given uniquekey, return 404
+                res.writeHead(404, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: "Not found",
+                        longitude: "Not found",
+                    })
+                )
+            }
+        } else if (req.url.startsWith("/rushcheck/")) {
+            // Find the data based on the uniquekey
+            const responseData = getRush().find(
+                (element) => element.uniqueKey === uniqueKey
+            )
+            if (responseData) {
+                res.writeHead(200, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: responseData.latitude,
+                        longitude: responseData.longitude,
+                    })
+                )
+            } else {
+                // If no data found for the given uniquekey, return 404
+                res.writeHead(404, { "Content-Type": "application/json" })
+                res.end(
+                    JSON.stringify({
+                        latitude: "Not found",
+                        longitude: "Not found",
+                    })
+                )
+            }
         } else {
             res.writeHead(404, { "Content-Type": "application/json" })
-            const errorData = { error: "404 Not Found" }
-            res.end(JSON.stringify(errorData))
+            res.end(
+                JSON.stringify({
+                    latitude: "Not found",
+                    longitude: "Not found",
+                })
+            )
         }
     })
 
