@@ -1,6 +1,6 @@
 import { fetchData } from "../../utils/fetchData.js";
 
-let data = await fetchData(process.env.JALANDHAR_WEST_LOCATION_URL);
+let data = [];
 
 async function fetchDataAndUpdate() {
   try {
@@ -9,6 +9,7 @@ async function fetchDataAndUpdate() {
     console.error("Error fetching data:", error);
   }
 }
+setTimeout(fetchDataAndUpdate, 25000);
 
 setInterval(fetchDataAndUpdate, 24 * 60 * 60 * 1000);
 
