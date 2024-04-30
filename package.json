@@ -9,8 +9,5 @@
         "start": "node --env-file=.env ./src/index.js"
     },
     "author": "Swagat Swaroop Parida",
-    "license": "ISC",
-    "dependencies": {
-        "artillery": "^2.0.11"
-    }
+    "license": "ISC"
 }
