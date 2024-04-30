@@ -10,6 +10,6 @@ async function fetchDataAndUpdate() {
     }
 }
 
-setInterval(fetchDataAndUpdate, 5 * 60 * 1000)
+setInterval(fetchDataAndUpdate, 2 * 60 * 1000)
 
 export const getRush = () => data
