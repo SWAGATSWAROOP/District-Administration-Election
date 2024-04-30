@@ -1,17 +1,17 @@
-import { fetchData } from "../../utils/fetchData.js"
+import { fetchData } from "../../utils/fetchData.js";
 
-let data = []
+let data = [];
 
 async function fetchDataAndUpdate() {
-    try {
-        data = await fetchData(process.env.ADAMPUR_LOCATION_URL)
-    } catch (error) {
-        console.error("Error fetching data:", error)
-    }
+  try {
+    data = await fetchData(process.env.ADAMPUR_LOCATION_URL);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 }
 
-setTimeout(fetchDataAndUpdate, 5000)
+setTimeout(fetchDataAndUpdate, 5000);
 
-setInterval(fetchDataAndUpdate, 24 * 60 * 60 * 1000)
+setInterval(fetchDataAndUpdate, 24 * 60 * 60 * 1000);
 
-export const getAdampur = () => data
+export const getAdampur = () => data;

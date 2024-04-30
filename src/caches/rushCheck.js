@@ -1,15 +1,15 @@
-import { fetchData } from "../utils/fetchData.js"
+import { fetchData } from "../utils/fetchData.js";
 
-let data = await fetchData(process.env.RUSH_CHECK_URL)
+let data = await fetchData(process.env.RUSH_CHECK_URL);
 
 async function fetchDataAndUpdate() {
-    try {
-        data = await fetchData(process.env.RUSH_CHECK_URL)
-    } catch (error) {
-        console.error("Error fetching data:", error)
-    }
+  try {
+    data = await fetchData(process.env.RUSH_CHECK_URL);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 }
 
-setInterval(fetchDataAndUpdate, 2 * 60 * 1000)
+setInterval(fetchDataAndUpdate, 2 * 60 * 1000);
 
-export const getRush = () => data
+export const getRush = () => data;
