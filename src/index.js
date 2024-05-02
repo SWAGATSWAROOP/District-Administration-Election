@@ -34,12 +34,11 @@ if (cluster.isPrimary) {
     // Extracting the uniquekey from the URL
     const urlParts = req.url.split("/");
     // Extract the uniquekey from the URL
-    const uniqueKey = decodeURIComponent(urlParts[urlParts.length - 1]);
+    const unique = decodeURIComponent(urlParts[urlParts.length - 1]);
+    const uniqueKey = parseInt(unique, 10);
     if (req.url.startsWith("/phillaur/")) {
       // Find the data based on the uniquekey
-      const responseData = getPhillaur().find(
-        (element) => element.uniqueKey === uniqueKey
-      );
+      const responseData = getPhillaur()[uniqueKey - 1];
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(
         JSON.stringify({
@@ -48,9 +47,7 @@ if (cluster.isPrimary) {
       );
     } else if (req.url.startsWith("/adampur/")) {
       // Find the data based on the uniquekey
-      const responseData = getAdampur().find(
-        (element) => element.uniqueKey === uniqueKey
-      );
+      const responseData = getAdampur()[uniqueKey - 1];
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(
         JSON.stringify({
@@ -59,9 +56,7 @@ if (cluster.isPrimary) {
       );
     } else if (req.url.startsWith("/jalandharcantt/")) {
       // Find the data based on the uniquekey
-      const responseData = getjalandharCantt().find(
-        (element) => element.uniqueKey === uniqueKey
-      );
+      const responseData = getjalandharCantt()[uniqueKey - 1];
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(
         JSON.stringify({
@@ -70,9 +65,7 @@ if (cluster.isPrimary) {
       );
     } else if (req.url.startsWith("/jalandharnorth/")) {
       // Find the data based on the uniquekey
-      const responseData = getjalandharNorth().find(
-        (element) => element.uniqueKey === uniqueKey
-      );
+      const responseData = getjalandharNorth()[uniqueKey - 1];
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(
         JSON.stringify({
@@ -81,9 +74,7 @@ if (cluster.isPrimary) {
       );
     } else if (req.url.startsWith("/jalandharcenter/")) {
       // Find the data based on the uniquekey
-      const responseData = getjalandharCenter().find(
-        (element) => element.uniqueKey === uniqueKey
-      );
+      const responseData = getjalandharCenter()[uniqueKey - 1];
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(
         JSON.stringify({
@@ -92,9 +83,7 @@ if (cluster.isPrimary) {
       );
     } else if (req.url.startsWith("/jalandharwest/")) {
       // Find the data based on the uniquekey
-      const responseData = getjalandharWest().find(
-        (element) => element.uniqueKey === uniqueKey
-      );
+      const responseData = getjalandharWest()[uniqueKey - 1];
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(
         JSON.stringify({
@@ -103,9 +92,7 @@ if (cluster.isPrimary) {
       );
     } else if (req.url.startsWith("/kartapur/")) {
       // Find the data based on the uniquekey
-      const responseData = getKartarpur().find(
-        (element) => element.uniqueKey === uniqueKey
-      );
+      const responseData = getKartarpur()[uniqueKey - 1];
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(
         JSON.stringify({
@@ -114,9 +101,7 @@ if (cluster.isPrimary) {
       );
     } else if (req.url.startsWith("/shahkot/")) {
       // Find the data based on the uniquekey
-      const responseData = getShahkot().find(
-        (element) => element.uniqueKey === uniqueKey
-      );
+      const responseData = getShahkot()[uniqueKey - 1];
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(
         JSON.stringify({
@@ -125,9 +110,7 @@ if (cluster.isPrimary) {
       );
     } else if (req.url.startsWith("/nakodar/")) {
       // Find the data based on the uniquekey
-      const responseData = getNakodar().find(
-        (element) => element.uniqueKey === uniqueKey
-      );
+      const responseData = getNakodar()[uniqueKey - 1];
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(
         JSON.stringify({
