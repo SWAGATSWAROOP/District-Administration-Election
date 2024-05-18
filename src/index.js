@@ -1,19 +1,16 @@
 import cluster from "node:cluster";
-import express from "express";
+import express, { urlencoded } from "express";
 import { availableParallelism } from "node:os";
 import process from "node:process";
-import { getPhillaur } from "./caches/locations/phillaurLocation.js";
-import { getAdampur } from "./caches/locations/adampurLocation.js";
-import { getjalandharCantt } from "./caches/locations/jalandharCanttLocation.js";
-import { getjalandharCenter } from "./caches/locations/jalandharCenterLocation.js";
-import { getjalandharNorth } from "./caches/locations/jalandharNorthLocation.js";
-import { getjalandharWest } from "./caches/locations/jalandharWestLocation.js";
-import { getNakodar } from "./caches/locations/nakodarLocation.js";
-import { getShahkot } from "./caches/locations/shahkotLocation.js";
-import { getKartarpur } from "./caches/locations/kartarpurLocation.js";
-import { getRush } from "./caches/rushCheck.js";
+import { fetchDataAndUpdate } from "./utils/rushCheck.js";
+import locationRouter from "./routes/location.js";
+import rushRouter from "./routes/rush.js";
+import ConnectToDB from "./db/mongodb/mongodb.js";
 
+ConnectToDB();
 const numCPUs = availableParallelism();
+export const app = express();
+setInterval(fetchDataAndUpdate, 2 * 60 * 1000);
 
 if (cluster.isPrimary) {
   console.log(`Primary ${process.pid} is running`);
@@ -27,64 +24,11 @@ if (cluster.isPrimary) {
     console.log(`worker ${worker.process.pid} died`);
   });
 } else {
-  const app = express();
   const PORT = process.env.PORT || 8000;
 
-  app.get("/phillaur/:uniqueKey", (req, res) => {
-    const responseData = getPhillaur()[req.params.uniqueKey - 1];
-    res.json({ data: responseData.url });
-  });
-
-  app.get("/adampur/:uniqueKey", (req, res) => {
-    const responseData = getAdampur()[req.params.uniqueKey - 1];
-    res.json({ data: responseData.url });
-  });
-
-  app.get("/kartarpur/:uniqueKey", (req, res) => {
-    const responseData = getKartarpur()[req.params.uniqueKey - 1];
-    res.json({ data: responseData.url });
-  });
-
-  app.get("/shahkot/:uniqueKey", (req, res) => {
-    const responseData = getShahkot()[req.params.uniqueKey - 1];
-    res.json({ data: responseData.url });
-  });
-
-  app.get("/jalandharcantt/:uniqueKey", (req, res) => {
-    const responseData = getjalandharCantt()[req.params.uniqueKey - 1];
-    res.json({ data: responseData.url });
-  });
-
-  app.get("/jalandharnorth/:uniqueKey", (req, res) => {
-    const responseData = getjalandharNorth()[req.params.uniqueKey - 1];
-    res.json({ data: responseData.url });
-  });
-
-  app.get("/jalandharwest/:uniqueKey", (req, res) => {
-    const responseData = getjalandharWest()[req.params.uniqueKey - 1];
-    res.json({ data: responseData.url });
-  });
-
-  app.get("/jalandharcenter/:uniqueKey", (req, res) => {
-    const responseData = getjalandharCenter()[req.params.uniqueKey - 1];
-    res.json({ data: responseData.url });
-  });
-
-  app.get("/nakodar/:uniqueKey", (req, res) => {
-    const responseData = getNakodar()[req.params.uniqueKey - 1];
-    res.json({ data: responseData.url });
-  });
-
-  app.get("/rush/:uniqueKey", (req, res) => {
-    const responseData = getRush().find(
-      (element) => element.uniqueKey === uniqueKey
-    );
-    res.json({ data: responseData.url });
-  });
-
-  app.get("*", (req, res) => {
-    res.status(404).json({ data: "Not found" });
-  });
+  app.use(urlencoded);
+  app.use("/rush", rushRouter);
+  app.use("/location", locationRouter);
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
