@@ -26,7 +26,8 @@ if (cluster.isPrimary) {
 } else {
   const PORT = process.env.PORT || 8000;
 
-  app.use(urlencoded);
+  app.use(urlencoded({ extended: true }));
+  app.use(express.json());
   app.use("/rush", rushRouter);
   app.use("/location", locationRouter);
 
