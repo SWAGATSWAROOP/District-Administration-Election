@@ -21,7 +21,17 @@ export const Rush = async (req, res) => {
 
     const givenTimestamp = new Date(data.time);
     const time = convertTime(givenTimestamp);
-    givenTimestamp.setMinutes(givenTimestamp.getMinutes() + 15);
+    // Calculate total minutes after adding 15 minutes
+    const totalMinutes = givenTimestamp.getMinutes() + 15;
+    // Check if totalMinutes exceeds 60
+    if (totalMinutes >= 60) {
+      const additionalHours = Math.floor(totalMinutes / 60);
+      const remainingMinutes = totalMinutes % 60;
+
+      // Adjust hours and minutes
+      givenTimestamp.setHours(givenTimestamp.getHours() + additionalHours);
+      givenTimestamp.setMinutes(remainingMinutes);
+    }
     const currentTime = new Date();
     const ttl = currentTime - givenTimestamp;
     await redis.set(
