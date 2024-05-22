@@ -1,5 +1,4 @@
 import { redis } from "../db/redis/redis.js";
-import { convertTime } from "../utils/conversionTime.js";
 
 export const Rush = async (req, res) => {
   try {
@@ -20,24 +19,19 @@ export const Rush = async (req, res) => {
       .select("-location -boothid");
 
     const givenTimestamp = new Date(data.time);
-    const time = convertTime(givenTimestamp);
-    // Calculate total minutes after adding 15 minutes
-    const totalMinutes = givenTimestamp.getMinutes() + 15;
-    // Check if totalMinutes exceeds 60
-    if (totalMinutes >= 60) {
-      const additionalHours = Math.floor(totalMinutes / 60);
-      const remainingMinutes = totalMinutes % 60;
-
-      // Adjust hours and minutes
-      givenTimestamp.setHours(givenTimestamp.getHours() + additionalHours);
-      givenTimestamp.setMinutes(remainingMinutes);
-    }
-    const currentTime = new Date();
-    const ttl = currentTime - givenTimestamp;
+    const linuxTimeStampRush = Date.parse(givenTimestamp) + 15000;
+    const currentDate = new Date();
+    const currentLinuxTimeStamp = Date.parse(currentDate);
+    const ttl = linuxTimeStampRush - currentLinuxTimeStamp;
+    const time = givenTimestamp
+      .toLocaleString(undefined, {
+        timeZone: "Asia/Kolkata",
+      })
+      .split(", ")[1];
     await redis.set(
       key,
       { message: { time: time, rush: data.rush } },
-      "EX",
+      "PX",
       ttl
     );
     return res.status(200).json({ message: data });

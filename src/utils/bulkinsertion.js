@@ -4,7 +4,12 @@ export const bulkUpdate = async (data, model, rush = true) => {
     const update = {};
     if (rush) {
       filter.location = element.location;
-      update.$set = { rush: element.rush };
+      const currenttime = new Date();
+      const currentLinuxTimeStamp = Date.parse(currenttime);
+      const givenLinuxTimeStamp = Date.parse(element.time);
+      if (currentLinuxTimeStamp - givenLinuxTimeStamp <= 15000) {
+        update.$set = { rush: element.rush, time: element.time };
+      }
     } else {
       update.$set = { url: element.url };
     }
