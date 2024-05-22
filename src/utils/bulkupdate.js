@@ -1,9 +1,8 @@
-import { RushCheck } from "../models/rushcheckschema.js";
+import { TotalBoothLocation } from "../models/locationschema.js";
 
 const checkTimeStamp = async (timestamp, filter) => {
-  const time = await RushCheck.findOne(filter);
+  const time = await TotalBoothLocation.findOne(filter);
   if (!time) return true;
-  console.log(time.timestamp);
   return timestamp > time.timestamp ? true : false;
 };
 
@@ -30,6 +29,6 @@ export const bulkUpdate = async (data) => {
     })
   );
 
-  await RushCheck.bulkWrite(bulkOps);
+  await TotalBoothLocation.bulkWrite(bulkOps);
   console.log("Bulk update completed");
 };
