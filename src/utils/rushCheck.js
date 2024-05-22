@@ -1,12 +1,10 @@
 import { fetchData } from "./fetchData.js";
-import { bulkUpdate } from "./bulkinsertion.js";
-import { RushCheck } from "../models/rushcheckschema.js";
-let data = [];
+import { bulkUpdate } from "./bulkupdate.js";
 
 export const fetchDataAndUpdate = async () => {
   try {
-    data = await fetchData(process.env.RUSH_CHECK_URL);
-    await bulkUpdate(data, RushCheck);
+    const data = await fetchData(process.env.RUSH_CHECK_URL);
+    await bulkUpdate(data);
   } catch (error) {
     console.error("Error in inserting data:", error);
   }

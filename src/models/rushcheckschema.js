@@ -14,6 +14,9 @@ const rushSchema = new mongoose.Schema(
     time: {
       type: String,
     },
+    timestamp: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

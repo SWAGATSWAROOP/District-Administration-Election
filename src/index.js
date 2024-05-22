@@ -3,17 +3,18 @@ import express, { urlencoded } from "express";
 import { availableParallelism } from "node:os";
 import process from "node:process";
 import { fetchDataAndUpdate } from "./utils/rushCheck.js";
-import locationRouter from "./routes/location.js";
 import rushRouter from "./routes/rush.js";
 import ConnectToDB from "./db/mongodb/mongodb.js";
+import { checkIfDBisEmpty } from "./utils/insertLocations.js";
 
 ConnectToDB();
 const numCPUs = availableParallelism();
 export const app = express();
-setInterval(fetchDataAndUpdate, 2 * 60 * 1000);
 
 if (cluster.isPrimary) {
   console.log(`Primary ${process.pid} is running`);
+  checkIfDBisEmpty();
+  setInterval(fetchDataAndUpdate, 5*1000);
 
   // Fork workers.
   for (let i = 0; i < numCPUs; i++) {
@@ -29,7 +30,6 @@ if (cluster.isPrimary) {
   app.use(urlencoded({ extended: true }));
   app.use(express.json());
   app.use("/rush", rushRouter);
-  app.use("/location", locationRouter);
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
