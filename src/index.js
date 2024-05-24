@@ -1,5 +1,6 @@
 import cluster from "node:cluster";
 import express, { urlencoded } from "express";
+import cors from "cors";
 import { availableParallelism } from "node:os";
 import process from "node:process";
 import { fetchDataAndUpdate } from "./utils/rushCheck.js";
@@ -7,14 +8,27 @@ import rushRouter from "./routes/rush.js";
 import ConnectToDB from "./db/mongodb/mongodb.js";
 import { checkIfDBisEmpty } from "./utils/insertLocations.js";
 
+export const app = express();
+// const whitelist = [process.env.ORIGIN];
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+// };
+
+// app.use(cors(corsOptions));
+
 ConnectToDB();
 const numCPUs = availableParallelism();
-export const app = express();
 
 if (cluster.isPrimary) {
   console.log(`Primary ${process.pid} is running`);
   checkIfDBisEmpty();
-  setInterval(fetchDataAndUpdate, 5*1000);
+  setInterval(fetchDataAndUpdate, 60 * 1000);
 
   // Fork workers.
   for (let i = 0; i < numCPUs; i++) {
