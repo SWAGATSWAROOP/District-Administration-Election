@@ -7,7 +7,7 @@ const AllRush = async (_, res) => {
     if (exists) {
       const data = await redis.get("allrush");
       const jsonData = JSON.parse(data);
-      return res.status(200).json({ message: { rush: jsonData } });
+      return res.status(200).json(jsonData);
     }
 
     const data = await TotalBoothLocation.find().select(
@@ -16,7 +16,7 @@ const AllRush = async (_, res) => {
 
     const jsonData = JSON.stringify(data);
     await redis.set("allrush", jsonData, "EX", 200);
-    return res.status(200).json({ message: { rush: jsonData } });
+    return res.status(200).json(data);
   } catch (error) {
     console.log("Error", error);
     return res.status(500).json({ message: "Server Error" });
