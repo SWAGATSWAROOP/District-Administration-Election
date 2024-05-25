@@ -19,6 +19,14 @@ const boothSchema = new mongoose.Schema(
       type: String,
       default: "0",
     },
+    partname: {
+      type: String,
+      default: "",
+    },
+    partnamepb: {
+      type: String,
+      default: "",
+    },
     timestamp: {
       type: String,
       default: "0",
