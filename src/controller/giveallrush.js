@@ -15,7 +15,7 @@ const AllRush = async (_, res) => {
     );
 
     const jsonData = JSON.stringify(data);
-    await redis.set("allrush", jsonData, "EX", 200);
+    await redis.set("allrush", jsonData, "EX", 300);
     return res.status(200).json(data);
   } catch (error) {
     console.log("Error", error);
