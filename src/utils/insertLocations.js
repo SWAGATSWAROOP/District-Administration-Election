@@ -16,7 +16,7 @@ export async function checkIfDBisEmpty() {
       process.env.KARTARPUR_LOCATION_URL,
     ];
 
-    Promise.all(
+    await Promise.all(
       DB.map(async (url) => {
         const count = await TotalBoothLocation.countDocuments({});
         if (count === 0) {

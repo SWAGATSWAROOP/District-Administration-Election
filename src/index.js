@@ -30,7 +30,6 @@ if (cluster.isPrimary) {
   checkIfDBisEmpty();
   setInterval(fetchDataAndUpdate, 60 * 1000);
 
-  // Fork workers.
   for (let i = 0; i < numCPUs; i++) {
     cluster.fork();
   }
